@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../provider/AuthProvider";
 import { FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
+import axios from "axios";
 
 const LogIn = () => {
     const { login, googleLogin, showPassword, setShowPassword } = useContext(AuthContext);
@@ -32,25 +33,21 @@ const LogIn = () => {
         }
     };
 
-    // Google Login with User Info Storage
+    // Google Login with Axios
     const handleGoogleLogin = async () => {
         try {
             const result = await googleLogin();
             const user = result.user;
 
-            // Save user info to MongoDB
-            await fetch(`${import.meta.env.VITE_API_URL}/users`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: user.displayName,
-                    email: user.email,
-                    photoURL: user.photoURL,
-                    role: "user",
-                }),
+            // Save user info to MongoDB using Axios
+            await axios.post(`${import.meta.env.VITE_API_URL}/users`, {
+                name: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+                role: "user",
             });
 
-            // Show toast and delay navigation
+            // Show toast and navigate
             toast.success("Logged in with Google!");
             navigate(from, { replace: true });
         } catch (error) {

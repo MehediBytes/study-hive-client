@@ -4,6 +4,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
+import axios from "axios";
 
 const Register = () => {
     const { register, setUser, showPassword, setShowPassword, updateUserProfile } = useContext(AuthContext);
@@ -35,20 +36,17 @@ const Register = () => {
             // Update Firebase profile
             await updateUserProfile({ displayName: name, photoURL: photo });
 
-            // Save to MongoDB
+            // Save to MongoDB using Axios
             const newUser = { name, email, photo };
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/users`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(newUser),
-            });
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/users`, newUser);
 
-            if (response.ok) {
+            if (response.status === 200) {
                 toast.success("Registered successfully!");
                 navigate("/");
             }
         } catch (error) {
-            toast.error("Registration failed. Please try again.", error);
+            toast.error("Registration failed. Please try again.");
+            console.error("Error:", error);
         }
     };
 

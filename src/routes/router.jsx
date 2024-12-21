@@ -5,6 +5,12 @@ import ErrorPage from '../pages/ErrorPage';
 import AuthLayout from '../layouts/AuthLayout';
 import Register from '../pages/Register';
 import LogIn from '../pages/LogIn';
+import PrivateRoute from './PrivateRoute';
+import PendingAssignments from '../pages/PendingAssignments';
+import CreateAssignments from '../pages/CreateAssignments';
+import MyAssignments from '../pages/MyAssignments';
+import Home from '../pages/Home';
+import Assignments from '../pages/Assignments';
 
 
 const router = createBrowserRouter([
@@ -15,23 +21,23 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <h2>Home</h2>
+                element: <Home></Home>
             },          
             {
                 path: "/assignments",
-                element: <h2>All assignments are comming here</h2>
+                element: <Assignments></Assignments>
             },          
             {
                 path: "/pending-assignments",
-                element: <h2>Pending assignments are comming here</h2>
+                element: <PrivateRoute><PendingAssignments></PendingAssignments></PrivateRoute>
             },          
             {
                 path: "/create-assignments",
-                element: <h2>Creating of assignments are comming here</h2>
+                element: <PrivateRoute><CreateAssignments></CreateAssignments></PrivateRoute>
             },          
             {
                 path: "/my-assignments",
-                element: <h2>My assignments are comming here</h2>
+                element: <PrivateRoute><MyAssignments></MyAssignments></PrivateRoute>
             },          
         ]
     },
