@@ -1,13 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 const AuthLayout = () => {
     return (
-        <div className="max-w-6xl mx-auto bg-teal-50">
+        <div className="max-w-6xl mx-auto bg-green-200">
             {/* Navbar */}
             <nav>
-                
+                <Navbar></Navbar>
             </nav>
 
             {/* Outlet */}

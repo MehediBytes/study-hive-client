@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
     return (
         <div>
-            <footer className="footer bg-gradient-to-r from-teal-400 to-teal-600 text-base-100 p-10 md:flex md:justify-between">
+            <footer className="footer bg-gradient-to-r from-green-400 to-green-600 text-base-100 p-10 md:flex md:justify-between">
                 <nav>
                     <h6 className="footer-title">Services</h6>
                     <a className="link link-hover">Branding</a>
@@ -25,7 +25,7 @@ const Footer = () => {
                     <a className="link link-hover">Cookie policy</a>
                 </nav>
             </footer>
-            <footer className="footer bg-gradient-to-r from-teal-400 to-teal-600 text-base-100 border-base-100 border-t items-center p-4">
+            <footer className="footer bg-gradient-to-r from-green-400 to-green-600 text-base-100 border-base-100 border-t items-center p-4">
                 <aside className="grid-flow-col items-center gap-10">
                     <h1 className='text-base-100 text-xl md:text-3xl font-extrabold'>Study-Hive</h1>
                     <p className='text-base-100'>Copyright © {new Date().getFullYear()} - All right reserved</p>
