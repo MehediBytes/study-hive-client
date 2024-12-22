@@ -3,10 +3,12 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Assignments = () => {
     const { user } = useContext(AuthContext);
     const [assignments, setAssignments] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAssignments = async () => {
@@ -61,6 +63,22 @@ const Assignments = () => {
         });
     };
 
+    const handleUpdate = (assignment) => {
+        if (user?.email !== assignment.creatorEmail) {
+            Swal.fire({
+                icon: "error",
+                title: "Access Denied",
+                text: "You can only update assignments you created.",
+            });
+            return;
+        }
+        navigate(`/update-assignment/${assignment._id}`, { state: assignment });
+    };
+
+    const handleView = (assignment) => {
+        navigate(`/assignment-details/${assignment._id}`)
+    }
+
     return (
         <div className="max-w-7xl mx-auto pb-10 px-4">
             <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">Assignments</h1>
@@ -80,7 +98,7 @@ const Assignments = () => {
                         <p className="text-sm text-gray-500">Difficulty: {assignment.difficulty}</p>
                         <div className="flex space-x-2">
                             <button
-                               
+                                onClick={() => handleUpdate(assignment)}
                                 className="btn btn-warning btn-sm"
                             >
                                 Update
@@ -92,7 +110,7 @@ const Assignments = () => {
                                 Delete
                             </button>
                             <button
-                                
+                                onClick={() => handleView(assignment)}
                                 className="btn btn-primary btn-sm"
                             >
                                 View
