@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { AuthContext } from "../provider/AuthProvider";
 
 const CreateAssignments = () => {
+    const {user} = useContext(AuthContext);
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [marks, setMarks] = useState("");
@@ -30,7 +33,8 @@ const CreateAssignments = () => {
             marks,
             thumbnail,
             difficulty,
-            dueDate: dueDate.toISOString()
+            dueDate: dueDate.toISOString(),
+            creatorEmail: user?.email
         };
 
         try {
@@ -125,7 +129,7 @@ const CreateAssignments = () => {
                         placeholderText="Select a due date"
                     />
                 </div>
-                <button type="submit" className="btn btn-success w-full">
+                <button type="submit" className="btn bg-green-600 text-base-100 hover:bg-green-400 w-full">
                     Create Assignment
                 </button>
             </form>
