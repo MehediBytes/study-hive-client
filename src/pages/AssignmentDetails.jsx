@@ -12,7 +12,6 @@ const AssignmentDetails = () => {
     const [submission, setSubmission] = useState({
         googleDocsLink: "",
         quickNote: "",
-        status: "pending",
         userEmail: user?.email || "",
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +24,7 @@ const AssignmentDetails = () => {
                 );
                 setAssignment(response.data);
             } catch (error) {
-                toast.error("Failed to load assignment details.", error);
+                toast.error("Failed to load assignment details.");
             }
         };
 
@@ -34,8 +33,10 @@ const AssignmentDetails = () => {
 
     const handleSubmitAssignment = async () => {
         if (assignment?.creatorEmail === user?.email) {
-            toast.error("Creator can not submit his/her created assignment")
+            toast.error("Creator cannot submit their own assignment.");
+            return;
         }
+
         if (!submission.googleDocsLink || !submission.quickNote) {
             Swal.fire({
                 icon: "error",
@@ -46,14 +47,16 @@ const AssignmentDetails = () => {
         }
 
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/submittedAssignments`, {
-                ...submission,
-                id,
+            await axios.put(`${import.meta.env.VITE_API_URL}/assignments/${id}/submit`, {
+                googleDocsLink: submission.googleDocsLink,
+                quickNote: submission.quickNote,
+                userEmail: user?.email,
             });
+
             toast.success("Assignment submitted successfully!");
             setIsModalOpen(false);
         } catch (error) {
-            toast.error("Failed to submit the assignment.", error);
+            toast.error("Failed to submit the assignment.");
         }
     };
 
@@ -103,7 +106,6 @@ const AssignmentDetails = () => {
                     </button>
                 )}
 
-                {/* Modal for assignment submission */}
                 {isModalOpen && (
                     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
                         <div className="bg-white p-6 rounded-lg shadow-lg w-96">
