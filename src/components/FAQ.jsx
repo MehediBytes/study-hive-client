@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -34,17 +35,33 @@ const FAQ = () => {
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
-                            className={`collapse ${activeIndex === index ? "collapse-open" : "collapse-close"
-                                } bg-white border border-green-400 rounded-lg shadow-lg`}
+                            className="border border-green-400 bg-white rounded-lg shadow-lg"
                             onClick={() => toggleFaq(index)}
                         >
-                            <input type="checkbox" className="peer hidden" />
-                            <div className="collapse-title text-lg font-semibold text-gray-800 peer-checked:text-green-600">
+                            {/* Animated Collapse Header */}
+                            <motion.div
+                                className="cursor-pointer text-lg font-semibold text-gray-800 px-4 py-2"
+                                initial={{ color: "#000" }}
+                                animate={{ color: activeIndex === index ? "#16a34a" : "#000" }}
+                                transition={{ duration: 0.3 }}
+                            >
                                 {faq.question}
-                            </div>
-                            <div className="collapse-content text-gray-600">
-                                <p>{faq.answer}</p>
-                            </div>
+                            </motion.div>
+
+                            {/* Animated Collapse Content */}
+                            <AnimatePresence initial={false}>
+                                {activeIndex === index && (
+                                    <motion.div
+                                        className="text-gray-600 px-4 py-2"
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    >
+                                        <p>{faq.answer}</p>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     ))}
                 </div>

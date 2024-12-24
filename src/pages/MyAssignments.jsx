@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const MyAssignments = () => {
     const { user } = useContext(AuthContext);
@@ -50,7 +51,10 @@ const MyAssignments = () => {
     }, [user]);
 
     return (
-        <div className="max-w-5xl mx-auto py-10 px-4">
+        <div className="max-w-5xl mx-auto pb-10 px-4">
+            <Helmet>
+                <title>My-Assignments | Study-Hive</title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">
                 My Submitted Assignments
             </h1>
@@ -61,37 +65,37 @@ const MyAssignments = () => {
                 <div className="overflow-x-auto">
                     <table className="table-auto w-full border-collapse border border-gray-300">
                         <thead>
-                            <tr className="bg-green-600 text-white">
-                                <th className="border border-gray-300 px-4 py-2">Title</th>
-                                <th className="border border-gray-300 px-4 py-2">Status</th>
-                                <th className="border border-gray-300 px-4 py-2">Total Marks</th>
-                                <th className="border border-gray-300 px-4 py-2">Obtained Marks</th>
-                                <th className="border border-gray-300 px-4 py-2">Feedback</th>
-                                <th className="border border-gray-300 px-4 py-2">Submitted At</th>
+                            <tr className="bg-green-600 text-base-100">
+                                <th className="border border-base-100 px-4 py-2">Title</th>
+                                <th className="border border-base-100 px-4 py-2">Status</th>
+                                <th className="border border-base-100 px-4 py-2">Total Marks</th>
+                                <th className="border border-base-100 px-4 py-2">Obtained Marks</th>
+                                <th className="border border-base-100 px-4 py-2">Feedback</th>
+                                <th className="border border-base-100 px-4 py-2">Submitted At</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-center">
                             {submittedAssignments.map((assignment, index) => (
                                 <tr
                                     key={index}
-                                    className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
+                                    className={index % 2 === 0 ? "bg-gray-100" : "bg-green-100"}
                                 >
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment.title}
                                     </td>
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment.status}
                                     </td>
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment.marks}
                                     </td>
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment?.obtainedMarks}
                                     </td>
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment?.feedback}
                                     </td>
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment.submittedAt}
                                     </td>
                                 </tr>

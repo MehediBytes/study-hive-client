@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const PendingAssignments = () => {
     const { user } = useContext(AuthContext);
@@ -72,6 +73,11 @@ const PendingAssignments = () => {
             return;
         }
 
+        if (parseInt(obtainedMarks) > selectedAssignment.marks) {
+            toast.error(`Given marks cannot exceed ${selectedAssignment.marks}.`);
+            return;
+        }
+
         try {
             // Update the assignment with marks and feedback
             await axios.put(
@@ -96,7 +102,10 @@ const PendingAssignments = () => {
     };
 
     return (
-        <div className="max-w-5xl mx-auto py-10 px-4">
+        <div className="max-w-5xl mx-auto pb-10 px-4">
+            <Helmet>
+                <title>Pending-Assignments | Study-Hive</title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">
                 Pending Assignments
             </h1>
@@ -105,34 +114,34 @@ const PendingAssignments = () => {
                 <p className="text-center">No pending assignments available!</p>
             ) : (
                 <div className="overflow-x-auto">
-                    <table className="table-auto w-full border-collapse border border-gray-300">
+                    <table className="table-auto w-full border-collapse border border-base-100">
                         <thead>
-                            <tr className="bg-green-600 text-white">
-                                <th className="border border-gray-300 px-4 py-2">Title</th>
-                                <th className="border border-gray-300 px-4 py-2">Marks</th>
-                                <th className="border border-gray-300 px-4 py-2">Examinee</th>
-                                <th className="border border-gray-300 px-4 py-2">Actions</th>
+                            <tr className="bg-green-600 text-base-100">
+                                <th className="border border-base-100 px-4 py-2">Title</th>
+                                <th className="border border-base-100 px-4 py-2">Total Mark</th>
+                                <th className="border border-base-100 px-4 py-2">Examinee</th>
+                                <th className="border border-base-100 px-4 py-2">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-center">
                             {pendingAssignments.map((assignment, index) => (
                                 <tr
                                     key={assignment._id}
-                                    className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
+                                    className={index % 2 === 0 ? "bg-gray-100" : "bg-green-100"}
                                 >
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment.title}
                                     </td>
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment.marks}
                                     </td>
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         {assignment.userEmail}
                                     </td>
-                                    <td className="border border-gray-300 px-4 py-2">
+                                    <td className="border border-base-100 px-4 py-2">
                                         <button
                                             onClick={() => openModal(assignment)}
-                                            className="text-blue-500 hover:text-blue-700"
+                                            className="btn w-full text-base-100 bg-green-600 hover:bg-green-400"
                                         >
                                             Give Marks
                                         </button>
@@ -169,7 +178,7 @@ const PendingAssignments = () => {
                                 type="number"
                                 value={obtainedMarks}
                                 onChange={(e) => setObtainedMarks(e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                className="w-full px-3 py-2 border border-gray-400 rounded-md"
                             />
                         </div>
                         <div className="mb-4">
@@ -177,20 +186,20 @@ const PendingAssignments = () => {
                             <textarea
                                 value={feedback}
                                 onChange={(e) => setFeedback(e.target.value)}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                className="w-full px-3 py-2 border border-gray-400 rounded-md"
                                 rows="4"
                             />
                         </div>
                         <div className="flex justify-end">
                             <button
                                 onClick={handleMarkSubmit}
-                                className="bg-green-600 text-white px-4 py-2 rounded-md mr-2"
+                                className="bg-green-600 text-base-100 px-4 py-2 rounded-md mr-2"
                             >
                                 Submit
                             </button>
                             <button
                                 onClick={closeModal}
-                                className="bg-gray-400 text-white px-4 py-2 rounded-md"
+                                className="bg-red-400 text-base-100 px-4 py-2 rounded-md"
                             >
                                 Cancel
                             </button>

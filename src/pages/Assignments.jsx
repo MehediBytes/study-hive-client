@@ -4,6 +4,8 @@ import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 
 const Assignments = () => {
     const { user } = useContext(AuthContext);
@@ -28,10 +30,6 @@ const Assignments = () => {
             toast.error("Failed to load assignments.");
             console.error(error);
         }
-    };
-
-    const handleSearch = () => {
-        fetchAssignments();
     };
 
     const handleDelete = async (assignmentId, creatorEmail) => {
@@ -91,24 +89,53 @@ const Assignments = () => {
     };
 
     return (
-        <div className="max-w-5xl mx-auto pb-10 px-4">
-            <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">All Assignments</h1>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-5xl mx-auto pb-10 px-4"
+        >
+            <Helmet>
+                <title>All-Assignments | Study-Hive</title>
+            </Helmet>
+            <motion.h1
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="text-3xl font-bold text-green-600 mb-8 text-center"
+            >
+                All Assignments
+            </motion.h1>
 
-            <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-                <div className="flex items-center w-full md:w-1/3 mb-4 md:mb-0">
-                    <input
-                        type="text"
-                        placeholder="Search by title"
-                        className="input input-bordered w-full"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                    <button
-                        onClick={handleSearch}
-                        className="btn bg-green-600 text-base-100 font-semibold rounded-lg hover:bg-green-400 ml-2"
-                    >
-                        Search
-                    </button>
+            <motion.div
+                className="flex flex-col md:flex-row justify-between items-center mb-6"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+            >
+                <div className="w-full md:w-1/4 mb-4 md:mb-0">
+                    <label className="input input-bordered flex items-center gap-2">
+                        <input
+                            type="text"
+                            placeholder="Search by title"
+                            className="grow"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 16"
+                            fill="currentColor"
+                            className="h-4 w-4 opacity-70"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </label>
                 </div>
 
                 <select
@@ -121,13 +148,25 @@ const Assignments = () => {
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
                 </select>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    hidden: { opacity: 0 },
+                    visible: { opacity: 1 }
+                }}
+            >
                 {assignments.map((assignment) => (
-                    <div
+                    <motion.div
                         key={assignment._id}
                         className="bg-base-100 p-6 rounded-lg shadow-lg flex flex-col space-y-4"
+                        whileHover={{ scale: 1.05 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
                     >
                         <img
                             src={assignment.thumbnail}
@@ -157,10 +196,10 @@ const Assignments = () => {
                                 View
                             </button>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
     );
 };
 

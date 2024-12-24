@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const AssignmentDetails = () => {
     const { user } = useContext(AuthContext);
@@ -99,6 +100,9 @@ const AssignmentDetails = () => {
 
     return (
         <div className="max-w-5xl mx-auto pb-10 px-4">
+            <Helmet>
+                <title>Assignments-details | Study-Hive</title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">
                 {assignment.title}
             </h1>

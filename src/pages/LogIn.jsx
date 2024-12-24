@@ -93,14 +93,14 @@ const LogIn = () => {
                     </div>
                     <button
                         type="submit"
-                        className="btn btn-primary w-full bg-green-600 text-white font-bold rounded-lg shadow-md hover:bg-green-800 transform transition-transform"
+                        className="btn w-full bg-green-600 text-base-100 font-bold hover:bg-green-400"
                     >
                         Login
                     </button>
                     <button
                         type="button"
                         onClick={handleGoogleLogin}
-                        className="btn w-full bg-white text-green-600 border-green-400 hover:bg-green-100 rounded-lg flex items-center justify-center space-x-2 shadow-sm"
+                        className="btn w-full bg-base-100 text-green-600 border-green-400 hover:bg-green-200 flex items-center justify-center space-x-2"
                     >
                         <FaGoogle className="text-lg" />
                         <span>Login with Google</span>

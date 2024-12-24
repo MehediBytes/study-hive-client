@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const UpdateAssignment = () => {
     const location = useLocation();
@@ -74,6 +75,9 @@ const UpdateAssignment = () => {
 
     return (
         <div className="max-w-5xl mx-auto pb-10 px-4">
+            <Helmet>
+                <title>Update-Assignment | Study-Hive</title>
+            </Helmet>
             <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">Update Assignment</h1>
             <form onSubmit={handleSubmit} className="bg-base-100 p-6 rounded-lg shadow-lg space-y-6">
                 <div>
