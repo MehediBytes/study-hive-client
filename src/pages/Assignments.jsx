@@ -8,20 +8,31 @@ import { useNavigate } from "react-router-dom";
 const Assignments = () => {
     const { user } = useContext(AuthContext);
     const [assignments, setAssignments] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [difficultyFilter, setDifficultyFilter] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchAssignments = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/assignments`);
-                setAssignments(response.data);
-            } catch (error) {
-                toast.error("Failed to load assignments.");
-                console.error(error);
-            }
-        };
         fetchAssignments();
-    }, []);
+    }, [searchQuery, difficultyFilter]);
+
+    const fetchAssignments = async () => {
+        try {
+            const params = {};
+            if (searchQuery) params.title = searchQuery;
+            if (difficultyFilter) params.difficulty = difficultyFilter;
+
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/assignments`, { params });
+            setAssignments(response.data);
+        } catch (error) {
+            toast.error("Failed to load assignments.");
+            console.error(error);
+        }
+    };
+
+    const handleSearch = () => {
+        fetchAssignments();
+    };
 
     const handleDelete = async (assignmentId, creatorEmail) => {
         if (user?.email !== creatorEmail) {
@@ -76,12 +87,42 @@ const Assignments = () => {
     };
 
     const handleView = (assignment) => {
-        navigate(`/assignment-details/${assignment._id}`)
-    }
+        navigate(`/assignment-details/${assignment._id}`);
+    };
 
     return (
-        <div className="max-w-7xl mx-auto pb-10 px-4">
-            <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">Assignments</h1>
+        <div className="max-w-5xl mx-auto pb-10 px-4">
+            <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">All Assignments</h1>
+
+            <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+                <div className="flex items-center w-full md:w-1/3 mb-4 md:mb-0">
+                    <input
+                        type="text"
+                        placeholder="Search by title"
+                        className="input input-bordered w-full"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button
+                        onClick={handleSearch}
+                        className="btn bg-green-600 text-base-100 font-semibold rounded-lg hover:bg-green-400 ml-2"
+                    >
+                        Search
+                    </button>
+                </div>
+
+                <select
+                    className="select select-bordered w-full md:w-1/4"
+                    value={difficultyFilter}
+                    onChange={(e) => setDifficultyFilter(e.target.value)}
+                >
+                    <option value="">All Difficulties</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {assignments.map((assignment) => (
                     <div
