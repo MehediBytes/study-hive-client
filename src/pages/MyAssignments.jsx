@@ -10,30 +10,33 @@ const MyAssignments = () => {
     useEffect(() => {
         const fetchSubmittedAssignments = async () => {
             try {
-                const response = await axios.get(
+                // Fetch all assignments
+                const assignmentsResponse = await axios.get(
                     `${import.meta.env.VITE_API_URL}/assignments`
                 );
-
-                // Filter assignments by submissions made by the logged-in user
-                const userAssignments = response.data.filter((assignment) =>
-                    assignment.submissions?.some(
-                        (submission) => submission.userEmail === user?.email
-                    )
+                // Fetch all submissions for the user
+                const submissionsResponse = await axios.get(
+                    `${import.meta.env.VITE_API_URL}/submissions`
                 );
 
-                // Map submissions to include assignment details
-                const mappedAssignments = userAssignments.map((assignment) => {
-                    const userSubmission = assignment.submissions.find(
-                        (submission) => submission.userEmail === user?.email
+                // Filter the submissions for the logged-in user
+                const userSubmissions = submissionsResponse.data.filter(
+                    (submission) => submission.userEmail === user?.email
+                );
+
+                // Map submissions with corresponding assignment details
+                const mappedAssignments = userSubmissions.map((submission) => {
+                    const assignment = assignmentsResponse.data.find(
+                        (assign) => assign._id === submission.assignmentId
                     );
 
                     return {
                         title: assignment.title,
-                        status: userSubmission.status,
+                        status: submission.status,
                         marks: assignment.marks,
-                        obtainedMarks: userSubmission.obtainedMarks || "No mark got yet",
-                        feedback: userSubmission.feedback || "No feedback got yet",
-                        submittedAt: new Date(userSubmission.submittedAt).toLocaleDateString(),
+                        obtainedMarks: submission.obtainedMarks || "No marks yet",
+                        feedback: submission.feedback || "No feedback yet",
+                        submittedAt: new Date().toLocaleDateString(),
                     };
                 });
 
@@ -53,7 +56,7 @@ const MyAssignments = () => {
             </h1>
 
             {submittedAssignments.length === 0 ? (
-                <p className="text-center">You do not submit any Assignments yet!</p>
+                <p className="text-center">You have not submitted any assignments yet!</p>
             ) : (
                 <div className="overflow-x-auto">
                     <table className="table-auto w-full border-collapse border border-gray-300">
@@ -71,9 +74,7 @@ const MyAssignments = () => {
                             {submittedAssignments.map((assignment, index) => (
                                 <tr
                                     key={index}
-                                    className={
-                                        index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                                    }
+                                    className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
                                 >
                                     <td className="border border-gray-300 px-4 py-2">
                                         {assignment.title}
@@ -85,10 +86,10 @@ const MyAssignments = () => {
                                         {assignment.marks}
                                     </td>
                                     <td className="border border-gray-300 px-4 py-2">
-                                        {assignment.obtainedMarks}
+                                        {assignment?.obtainedMarks}
                                     </td>
                                     <td className="border border-gray-300 px-4 py-2">
-                                        {assignment.feedback}
+                                        {assignment?.feedback}
                                     </td>
                                     <td className="border border-gray-300 px-4 py-2">
                                         {assignment.submittedAt}

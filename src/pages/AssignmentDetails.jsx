@@ -13,6 +13,8 @@ const AssignmentDetails = () => {
         googleDocsLink: "",
         quickNote: "",
         userEmail: user?.email || "",
+        obtainedMarks: "",
+        feedback: "",
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -47,10 +49,25 @@ const AssignmentDetails = () => {
         }
 
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/assignments/${id}/submit`, {
+
+            // Check if the user already submitted this assignment
+            const existingSubmissionResponse = await axios.get(
+                `${import.meta.env.VITE_API_URL}/submissions/check?assignmentId=${assignment._id}&userEmail=${user?.email}`
+            );
+
+            if (existingSubmissionResponse.data) {
+                toast.error("You have already submitted this assignment.");
+                return;
+            }
+
+            await axios.post(`${import.meta.env.VITE_API_URL}/submissions`, {
                 googleDocsLink: submission.googleDocsLink,
                 quickNote: submission.quickNote,
                 userEmail: user?.email,
+                obtainedMarks: submission.obtainedMarks,
+                feedback: submission.feedback,
+                assignmentId: assignment._id,
+                status: "pending"
             });
 
             toast.success("Assignment submitted successfully!");
@@ -81,7 +98,7 @@ const AssignmentDetails = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto pb-10 px-4">
+        <div className="max-w-5xl mx-auto pb-10 px-4">
             <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">
                 {assignment.title}
             </h1>
