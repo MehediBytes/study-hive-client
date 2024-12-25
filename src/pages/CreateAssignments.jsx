@@ -21,9 +21,17 @@ const CreateAssignments = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const now = new Date();
+
         // Input Validation
         if (!title || !description || !marks || !thumbnail || !dueDate) {
             toast.error("Please fill out all required fields.");
+            return;
+        }
+
+        // Due Date Validation
+        if (dueDate <= now) {
+            toast.error("Due date must be a future date.");
             return;
         }
 

@@ -98,6 +98,8 @@ const AssignmentDetails = () => {
         return <p>Loading assignment details...</p>;
     }
 
+    const isDueDateOver = new Date(assignment.dueDate) < new Date();
+
     return (
         <div className="max-w-5xl mx-auto pb-10 px-4">
             <Helmet>
@@ -111,7 +113,7 @@ const AssignmentDetails = () => {
                 <img
                     src={assignment.thumbnail}
                     alt={assignment.title}
-                    className="rounded-lg h-48 object-cover"
+                    className="rounded-lg w-full h-96 object-cover"
                 />
                 <p className="text-sm">Marks: {assignment.marks}</p>
                 <p className="text-sm">Difficulty: {assignment.difficulty}</p>
@@ -119,12 +121,23 @@ const AssignmentDetails = () => {
                 <p className="text-sm">Description: {assignment.description}</p>
 
                 {user && (
-                    <button
-                        onClick={handleTakeAssignment}
-                        className="btn bg-green-600 text-base-100 hover:bg-green-400 mt-4"
-                    >
-                        Take Assignment
-                    </button>
+                    <>
+                        <button
+                            onClick={handleTakeAssignment}
+                            className={`btn mt-4 ${isDueDateOver
+                                    ? "btn-disabled bg-gray-400 text-gray-700"
+                                    : "bg-green-600 text-base-100 hover:bg-green-400"
+                                }`}
+                            disabled={isDueDateOver}
+                        >
+                            Take Assignment
+                        </button>
+                        {isDueDateOver && (
+                            <p className="text-red-600 mt-2">
+                                Assignment due date is over.
+                            </p>
+                        )}
+                    </>
                 )}
 
                 {isModalOpen && (
@@ -154,7 +167,7 @@ const AssignmentDetails = () => {
                             <div className="flex justify-between">
                                 <button
                                     onClick={handleSubmitAssignment}
-                                    className="btn btn-success"
+                                    className="btn btn-success text-base-100"
                                 >
                                     Submit Assignment
                                 </button>
