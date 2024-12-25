@@ -9,7 +9,6 @@ const PendingAssignments = () => {
     const [pendingAssignments, setPendingAssignments] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedAssignment, setSelectedAssignment] = useState(null);
-    console.log(selectedAssignment);
     const [obtainedMarks, setObtainedMarks] = useState("");
     const [feedback, setFeedback] = useState("");
 
