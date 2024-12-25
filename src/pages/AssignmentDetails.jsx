@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AssignmentDetails = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
+    const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
     const [assignment, setAssignment] = useState(null);
     const [submission, setSubmission] = useState({
         googleDocsLink: "",
@@ -52,8 +55,8 @@ const AssignmentDetails = () => {
         try {
 
             // Check if the user already submitted this assignment
-            const existingSubmissionResponse = await axios.get(
-                `${import.meta.env.VITE_API_URL}/submissions/check?assignmentId=${assignment._id}&userEmail=${user?.email}`
+            const existingSubmissionResponse = await axiosSecure.get(
+                `/submissions/check?assignmentId=${assignment._id}&userEmail=${user?.email}`
             );
 
             if (existingSubmissionResponse.data) {
@@ -62,12 +65,12 @@ const AssignmentDetails = () => {
             }
 
             await axios.post(`${import.meta.env.VITE_API_URL}/submissions`, {
-                googleDocsLink: submission.googleDocsLink,
-                quickNote: submission.quickNote,
+                googleDocsLink: submission?.googleDocsLink,
+                quickNote: submission?.quickNote,
                 userEmail: user?.email,
-                obtainedMarks: submission.obtainedMarks,
-                feedback: submission.feedback,
-                assignmentId: assignment._id,
+                obtainedMarks: submission?.obtainedMarks,
+                feedback: submission?.feedback,
+                assignmentId: assignment?._id,
                 status: "pending"
             });
 
@@ -76,6 +79,7 @@ const AssignmentDetails = () => {
         } catch (error) {
             toast.error("Failed to submit the assignment.");
         }
+        navigate("/my-assignments")
     };
 
     const handleTakeAssignment = () => {
@@ -94,11 +98,7 @@ const AssignmentDetails = () => {
         }));
     };
 
-    if (!assignment) {
-        return <p>Loading assignment details...</p>;
-    }
-
-    const isDueDateOver = new Date(assignment.dueDate) < new Date();
+    const isDueDateOver = new Date(assignment?.dueDate) < new Date();
 
     return (
         <div className="max-w-5xl mx-auto pb-10 px-4">
@@ -106,19 +106,19 @@ const AssignmentDetails = () => {
                 <title>Assignments-details | Study-Hive</title>
             </Helmet>
             <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">
-                {assignment.title}
+                {assignment?.title}
             </h1>
 
             <div className="bg-base-100 p-6 rounded-lg shadow-lg space-y-4">
                 <img
-                    src={assignment.thumbnail}
-                    alt={assignment.title}
+                    src={assignment?.thumbnail}
+                    alt={assignment?.title}
                     className="rounded-lg w-full h-96 object-cover"
                 />
-                <p className="text-sm">Marks: {assignment.marks}</p>
-                <p className="text-sm">Difficulty: {assignment.difficulty}</p>
-                <p className="text-sm">Due Date: {new Date(assignment.dueDate).toLocaleDateString()}</p>
-                <p className="text-sm">Description: {assignment.description}</p>
+                <p className="text-sm">Marks: {assignment?.marks}</p>
+                <p className="text-sm">Difficulty: {assignment?.difficulty}</p>
+                <p className="text-sm">Due Date: {new Date(assignment?.dueDate).toLocaleDateString()}</p>
+                <p className="text-sm">Description: {assignment?.description}</p>
 
                 {user && (
                     <>

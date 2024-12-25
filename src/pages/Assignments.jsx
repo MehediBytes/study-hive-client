@@ -6,31 +6,52 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loading from "./Loading";
 
 const Assignments = () => {
     const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
     const [assignments, setAssignments] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [difficultyFilter, setDifficultyFilter] = useState("");
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const itemsPerPage = 6;
 
     useEffect(() => {
         fetchAssignments();
-    }, [searchQuery, difficultyFilter]);
+    }, [searchQuery, difficultyFilter, currentPage]);
 
     const fetchAssignments = async () => {
         try {
-            const params = {};
-            if (searchQuery) params.title = searchQuery;
-            if (difficultyFilter) params.difficulty = difficultyFilter;
+            setLoading(true);
+            const params = {
+                page: currentPage,
+                limit: itemsPerPage,
+                title: searchQuery,
+                difficulty: difficultyFilter,
+            };
 
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/assignments`, { params });
-            setAssignments(response.data);
+            setAssignments(response.data.assignments);
+            setTotalPages(Math.ceil(response.data.total / itemsPerPage));
         } catch (error) {
-            toast.error("Failed to load assignments.");
-            console.error(error);
+            toast.error("Failed to load assignments.", error);
+        }
+        finally {
+            setLoading(false);
         }
     };
+
+    const handlePageChange = (newPage) => {
+        if (newPage >= 1 && newPage <= totalPages) {
+            setCurrentPage(newPage);
+        }
+    };
+
 
     const handleDelete = async (assignmentId, creatorEmail) => {
         if (user?.email !== creatorEmail) {
@@ -53,7 +74,7 @@ const Assignments = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`${import.meta.env.VITE_API_URL}/assignments/${assignmentId}`);
+                    await axiosSecure.delete(`/assignments/${assignmentId}`);
                     setAssignments(assignments.filter((assignment) => assignment._id !== assignmentId));
                     Swal.fire({
                         icon: "success",
@@ -150,55 +171,93 @@ const Assignments = () => {
                 </select>
             </motion.div>
 
-            <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                    hidden: { opacity: 0 },
-                    visible: { opacity: 1 }
-                }}
-            >
-                {assignments.map((assignment) => (
+            {loading ? (
+                <Loading></Loading>
+            ) : (
+                <div>
                     <motion.div
-                        key={assignment._id}
-                        className="bg-base-100 p-6 rounded-lg shadow-lg flex flex-col space-y-4"
-                        whileHover={{ scale: 1.05 }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3 }}
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: { opacity: 0 },
+                            visible: { opacity: 1 }
+                        }}
                     >
-                        <img
-                            src={assignment.thumbnail}
-                            alt={assignment.title}
-                            className="rounded-lg h-48 object-cover"
-                        />
-                        <h2 className="text-xl font-bold">{assignment.title}</h2>
-                        <p className="text-sm text-gray-500">Marks: {assignment.marks}</p>
-                        <p className="text-sm text-gray-500">Difficulty: {assignment.difficulty}</p>
-                        <div className="flex space-x-2">
-                            <button
-                                onClick={() => handleUpdate(assignment)}
-                                className="btn btn-warning btn-sm"
+                        {assignments.map((assignment) => (
+                            <motion.div
+                                key={assignment._id}
+                                className="bg-base-100 p-6 rounded-lg shadow-lg flex flex-col space-y-4"
+                                whileHover={{ scale: 1.05 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3 }}
                             >
-                                Update
-                            </button>
-                            <button
-                                onClick={() => handleDelete(assignment._id, assignment.creatorEmail)}
-                                className="btn btn-error btn-sm"
-                            >
-                                Delete
-                            </button>
-                            <button
-                                onClick={() => handleView(assignment)}
-                                className="btn btn-primary btn-sm"
-                            >
-                                View
-                            </button>
-                        </div>
+                                <img
+                                    src={assignment?.thumbnail}
+                                    alt={assignment?.title}
+                                    className="rounded-lg h-48 object-cover"
+                                />
+                                <h2 className="text-xl font-bold">{assignment?.title}</h2>
+                                <p className="text-sm text-gray-500">Marks: {assignment?.marks}</p>
+                                <p className="text-sm text-gray-500">Difficulty: {assignment?.difficulty}</p>
+                                <div className="flex space-x-2">
+                                    <button
+                                        onClick={() => handleUpdate(assignment)}
+                                        className="btn btn-warning btn-sm"
+                                    >
+                                        Update
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(assignment._id, assignment.creatorEmail)}
+                                        className="btn btn-error btn-sm"
+                                    >
+                                        Delete
+                                    </button>
+                                    <button
+                                        onClick={() => handleView(assignment)}
+                                        className="btn btn-primary btn-sm"
+                                    >
+                                        View
+                                    </button>
+                                </div>
+                            </motion.div>
+                        ))}
+
                     </motion.div>
-                ))}
-            </motion.div>
+                    {assignments.length === 0 && (
+                        <p className="text-center mt-4">No assignments found. Try a different search or filter.</p>
+                    )}
+                    {/* Pagination Controls */}
+                    <div className="flex justify-center mt-6">
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="btn bg-base-100 text-green-400 btn-sm"
+                        >
+                            Previous
+                        </button>
+                        {[...Array(totalPages).keys()].map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handlePageChange(index + 1)}
+                                className={`btn btn-sm mx-1 ${currentPage === index + 1 ? 'btn-active text-green-400' : ''}`}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            className="btn bg-base-100 text-green-400 btn-sm"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
+            )
+            }
+
         </motion.div>
     );
 };

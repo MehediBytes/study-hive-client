@@ -3,14 +3,18 @@ import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import Loading from "./Loading";
 
 const MyAssignments = () => {
     const { user } = useContext(AuthContext);
     const [submittedAssignments, setSubmittedAssignments] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchSubmittedAssignments = async () => {
             try {
+                setLoading(true);
+
                 // Fetch all assignments
                 const assignmentsResponse = await axios.get(
                     `${import.meta.env.VITE_API_URL}/assignments`
@@ -27,14 +31,15 @@ const MyAssignments = () => {
 
                 // Map submissions with corresponding assignment details
                 const mappedAssignments = userSubmissions.map((submission) => {
-                    const assignment = assignmentsResponse.data.find(
+                    const assignment = assignmentsResponse.data.
+                    assignments.find(
                         (assign) => assign._id === submission.assignmentId
                     );
 
                     return {
-                        title: assignment.title,
+                        title: assignment?.title,
                         status: submission.status,
-                        marks: assignment.marks,
+                        marks: assignment?.marks,
                         obtainedMarks: submission.obtainedMarks || "No marks yet",
                         feedback: submission.feedback || "No feedback yet",
                         submittedAt: new Date().toLocaleDateString(),
@@ -43,7 +48,10 @@ const MyAssignments = () => {
 
                 setSubmittedAssignments(mappedAssignments);
             } catch (error) {
-                toast.error("Failed to load submitted assignments.");
+                toast.error("Failed to load submitted assignments.", error);
+                console.log(error.message);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -59,7 +67,9 @@ const MyAssignments = () => {
                 My Submitted Assignments
             </h1>
 
-            {submittedAssignments.length === 0 ? (
+            {loading ? (
+                <Loading></Loading>
+            ) : submittedAssignments.length === 0 ? (
                 <p className="text-center">You have not submitted any assignments yet!</p>
             ) : (
                 <div className="overflow-x-auto">
@@ -81,13 +91,17 @@ const MyAssignments = () => {
                                     className={index % 2 === 0 ? "bg-gray-100" : "bg-green-100"}
                                 >
                                     <td className="border border-base-100 px-4 py-2">
-                                        {assignment.title}
+                                        {assignment?.title}
+                                    </td>
+                                    <td
+                                        className={`border border-base-100 px-4 py-2 ${assignment?.status === "pending" && "text-yellow-400"
+                                            } ${assignment?.status === "completed" && "text-green-500"
+                                            }`}
+                                    >
+                                        {assignment?.status}
                                     </td>
                                     <td className="border border-base-100 px-4 py-2">
-                                        {assignment.status}
-                                    </td>
-                                    <td className="border border-base-100 px-4 py-2">
-                                        {assignment.marks}
+                                        {assignment?.marks}
                                     </td>
                                     <td className="border border-base-100 px-4 py-2">
                                         {assignment?.obtainedMarks}
@@ -96,7 +110,7 @@ const MyAssignments = () => {
                                         {assignment?.feedback}
                                     </td>
                                     <td className="border border-base-100 px-4 py-2">
-                                        {assignment.submittedAt}
+                                        {assignment?.submittedAt}
                                     </td>
                                 </tr>
                             ))}

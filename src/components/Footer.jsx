@@ -14,38 +14,33 @@ const Footer = () => {
 
     return (
         <div>
-            <motion.footer
+            <footer
                 className="footer bg-gradient-to-r from-green-400 to-green-600 text-base-100 p-10 md:flex md:justify-between"
-                initial="hidden"
-                animate="visible"
-                variants={parentVariants}
+                
             >
-                <motion.nav variants={navItemVariants}>
+                <nav>
                     <h6 className="footer-title">Services</h6>
                     <a className="link link-hover">Branding</a>
                     <a className="link link-hover">Design</a>
                     <a className="link link-hover">Marketing</a>
                     <a className="link link-hover">Advertisement</a>
-                </motion.nav>
-                <motion.nav variants={navItemVariants}>
+                </nav>
+                <nav>
                     <h6 className="footer-title">Company</h6>
                     <a className="link link-hover">About us</a>
                     <a className="link link-hover">Contact</a>
                     <a className="link link-hover">Jobs</a>
                     <a className="link link-hover">Press kit</a>
-                </motion.nav>
-                <motion.nav variants={navItemVariants}>
+                </nav>
+                <nav>
                     <h6 className="footer-title">Legal</h6>
                     <a className="link link-hover">Terms of use</a>
                     <a className="link link-hover">Privacy policy</a>
                     <a className="link link-hover">Cookie policy</a>
-                </motion.nav>
-            </motion.footer>
-            <motion.footer
+                </nav>
+            </footer>
+            <footer
                 className="footer bg-gradient-to-r from-green-400 to-green-600 text-base-100 border-base-100 border-t items-center p-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
             >
                 <motion.aside
                     className="grid-flow-col items-center gap-10"
@@ -59,11 +54,8 @@ const Footer = () => {
                         Copyright © {new Date().getFullYear()} - All right reserved
                     </p>
                 </motion.aside>
-                <motion.nav
+                <nav
                     className="grid-flow-col gap-4 md:place-self-center md:justify-self-end text-base-100"
-                    variants={parentVariants}
-                    initial="hidden"
-                    animate="visible"
                 >
                     <motion.a
                         whileHover={{ scale: 1.2, rotate: 10 }}
@@ -107,8 +99,8 @@ const Footer = () => {
                             <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
                         </svg>
                     </motion.a>
-                </motion.nav>
-            </motion.footer>
+                </nav>
+            </footer>
         </div>
     );
 };

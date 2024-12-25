@@ -5,8 +5,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const UpdateAssignment = () => {
+    const axiosSecure = useAxiosSecure();
     const location = useLocation();
     const navigate = useNavigate();
     const assignment = location.state || {};
@@ -57,8 +59,8 @@ const UpdateAssignment = () => {
                 dueDate: formData.dueDate.toISOString(),
             };
 
-            const response = await axios.put(
-                `${import.meta.env.VITE_API_URL}/assignments/${assignment._id}`,
+            const response = await axiosSecure.put(
+                `/assignments/${assignment._id}`,
                 updatedAssignment
             );
 

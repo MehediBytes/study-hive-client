@@ -3,18 +3,23 @@ import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import Loading from "./Loading";
 
 const PendingAssignments = () => {
     const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
     const [pendingAssignments, setPendingAssignments] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedAssignment, setSelectedAssignment] = useState(null);
     const [obtainedMarks, setObtainedMarks] = useState("");
     const [feedback, setFeedback] = useState("");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchPendingAssignments = async () => {
             try {
+                setLoading(true);
                 // Fetch all assignments
                 const assignmentsResponse = await axios.get(
                     `${import.meta.env.VITE_API_URL}/assignments`
@@ -32,13 +37,14 @@ const PendingAssignments = () => {
 
                 // Map the assignments with their corresponding assignment details
                 const mappedAssignments = pendingAssignments.map((submission) => {
-                    const assignment = assignmentsResponse.data.find(
+                    const assignment = assignmentsResponse.data.
+                    assignments.find(
                         (assign) => assign._id === submission.assignmentId
                     );
                     return {
                         _id: submission._id,
-                        title: assignment.title,
-                        marks: assignment.marks,
+                        title: assignment?.title,
+                        marks: assignment?.marks,
                         userEmail: submission.userEmail,
                         googleDocsLink: submission.googleDocsLink,
                         quickNote: submission.quickNote,
@@ -48,6 +54,9 @@ const PendingAssignments = () => {
                 setPendingAssignments(mappedAssignments);
             } catch (error) {
                 toast.error("Failed to load pending assignments.");
+            }
+            finally {
+                setLoading(false);
             }
         };
 
@@ -79,8 +88,8 @@ const PendingAssignments = () => {
 
         try {
             // Update the assignment with marks and feedback
-            await axios.put(
-                `${import.meta.env.VITE_API_URL}/submissions/${selectedAssignment._id}`,
+            await axiosSecure.put(
+                `/submissions/${selectedAssignment._id}`,
                 {
                     obtainedMarks: obtainedMarks,
                     feedback: feedback,
@@ -109,7 +118,9 @@ const PendingAssignments = () => {
                 Pending Assignments
             </h1>
 
-            {pendingAssignments.length === 0 ? (
+            {loading ? (
+                <Loading></Loading>
+            ) : pendingAssignments.length === 0 ? (
                 <p className="text-center">No pending assignments available!</p>
             ) : (
                 <div className="overflow-x-auto">
