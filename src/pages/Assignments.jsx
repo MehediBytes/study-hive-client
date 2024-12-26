@@ -17,27 +17,22 @@ const Assignments = () => {
     const [difficultyFilter, setDifficultyFilter] = useState("");
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const itemsPerPage = 6;
 
     useEffect(() => {
         fetchAssignments();
-    }, [searchQuery, difficultyFilter, currentPage]);
+    }, [searchQuery, difficultyFilter]);
 
     const fetchAssignments = async () => {
         try {
             setLoading(true);
             const params = {
-                page: currentPage,
-                limit: itemsPerPage,
                 title: searchQuery,
                 difficulty: difficultyFilter,
             };
 
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/assignments`, { params });
-            setAssignments(response.data.assignments);
-            setTotalPages(Math.ceil(response.data.total / itemsPerPage));
+            setAssignments(response.data);
+            
         } catch (error) {
             toast.error("Failed to load assignments.", error);
         }
@@ -45,13 +40,6 @@ const Assignments = () => {
             setLoading(false);
         }
     };
-
-    const handlePageChange = (newPage) => {
-        if (newPage >= 1 && newPage <= totalPages) {
-            setCurrentPage(newPage);
-        }
-    };
-
 
     const handleDelete = async (assignmentId, creatorEmail) => {
         if (user?.email !== creatorEmail) {
@@ -232,32 +220,7 @@ const Assignments = () => {
                     {assignments.length === 0 && (
                         <p className="text-center mt-4">No assignments found. Try a different search or filter.</p>
                     )}
-                    {/* Pagination Controls */}
-                    <div className="flex justify-center mt-6">
-                        <button
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                            className="btn bg-base-100 text-green-400 btn-sm"
-                        >
-                            Previous
-                        </button>
-                        {[...Array(totalPages).keys()].map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => handlePageChange(index + 1)}
-                                className={`btn btn-sm mx-1 ${currentPage === index + 1 ? 'btn-active text-green-400' : ''}`}
-                            >
-                                {index + 1}
-                            </button>
-                        ))}
-                        <button
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage === totalPages}
-                            className="btn bg-base-100 text-green-400 btn-sm"
-                        >
-                            Next
-                        </button>
-                    </div>
+                    
                 </div>
             )
             }

@@ -28,7 +28,7 @@ const AssignmentDetails = () => {
                 const response = await axios.get(
                     `${import.meta.env.VITE_API_URL}/assignments/${id}`
                 );
-                setAssignment(response.data);
+                setAssignment(response?.data);
             } catch (error) {
                 toast.error("Failed to load assignment details.");
             }

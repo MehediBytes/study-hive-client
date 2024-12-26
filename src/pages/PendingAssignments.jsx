@@ -37,8 +37,7 @@ const PendingAssignments = () => {
 
                 // Map the assignments with their corresponding assignment details
                 const mappedAssignments = pendingAssignments.map((submission) => {
-                    const assignment = assignmentsResponse.data.
-                    assignments.find(
+                    const assignment = assignmentsResponse.data.find(
                         (assign) => assign._id === submission.assignmentId
                     );
                     return {

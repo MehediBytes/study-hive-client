@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../provider/AuthProvider'
+import { toast } from 'react-toastify'
 
 const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -17,7 +18,7 @@ const useAxiosSecure = () => {
         return res
       },
       async error => {
-        console.log(
+        toast.error(
           'error caught from our very own axios interceptor-->',
           error.response
         )
