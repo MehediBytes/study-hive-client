@@ -187,7 +187,7 @@ const Assignments = () => {
                         {assignments.map((assignment) => (
                             <motion.div
                                 key={assignment._id}
-                                className="bg-base-100 p-6 rounded-lg shadow-lg flex flex-col space-y-4"
+                                className="bg-base-100 p-6 rounded-lg shadow-lg flex flex-col justify-between space-y-4"
                                 whileHover={{ scale: 1.05 }}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -199,8 +199,9 @@ const Assignments = () => {
                                     className="rounded-lg h-48 object-cover"
                                 />
                                 <h2 className="text-xl font-bold">{assignment?.title}</h2>
-                                <p className="text-sm text-gray-500">Marks: {assignment?.marks}</p>
-                                <p className="text-sm text-gray-500">Difficulty: {assignment?.difficulty}</p>
+                                <p className="text-sm text-gray-400">Marks: {assignment?.marks}</p>
+                                <p className="text-sm text-gray-400">Difficulty: {assignment?.difficulty}</p>
+                                <p className="text-sm text-gray-400">Deadline: {new Date(assignment?.dueDate).toLocaleDateString()}</p>
                                 <div className="flex space-x-2">
                                     <button
                                         onClick={() => handleUpdate(assignment)}
@@ -209,7 +210,7 @@ const Assignments = () => {
                                         Update
                                     </button>
                                     <button
-                                        onClick={() => handleDelete(assignment._id, assignment.creatorEmail)}
+                                        onClick={() => handleDelete(assignment._id, assignment?.creatorEmail)}
                                         className="btn btn-error btn-sm"
                                     >
                                         Delete

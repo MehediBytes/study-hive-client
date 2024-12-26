@@ -49,7 +49,6 @@ const MyAssignments = () => {
                 setSubmittedAssignments(mappedAssignments);
             } catch (error) {
                 toast.error("Failed to load submitted assignments.", error);
-                console.log(error.message);
             } finally {
                 setLoading(false);
             }

@@ -109,7 +109,7 @@ const AssignmentDetails = () => {
                 {assignment?.title}
             </h1>
 
-            <div className="bg-base-100 p-6 rounded-lg shadow-lg space-y-4">
+            <div className="bg-base-100 p-6 rounded-lg shadow-lg flex flex-col justify-between space-y-4">
                 <img
                     src={assignment?.thumbnail}
                     alt={assignment?.title}
@@ -117,7 +117,7 @@ const AssignmentDetails = () => {
                 />
                 <p className="text-sm">Marks: {assignment?.marks}</p>
                 <p className="text-sm">Difficulty: {assignment?.difficulty}</p>
-                <p className="text-sm">Due Date: {new Date(assignment?.dueDate).toLocaleDateString()}</p>
+                <p className="text-sm">Deadline: {new Date(assignment?.dueDate).toLocaleDateString()}</p>
                 <p className="text-sm">Description: {assignment?.description}</p>
 
                 {user && (

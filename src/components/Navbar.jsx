@@ -43,7 +43,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content rounded-box z-[1] bg-green-400 mt-3 w-52 p-2 shadow"
+                        className="menu menu-sm dropdown-content rounded-box z-[1] bg-green-600 mt-3 w-52 p-2 shadow"
                     >
                         <Fade cascade>
                             <li>
@@ -104,21 +104,21 @@ const Navbar = () => {
                         <div className="flex items-center gap-4 relative">
                             {/* User Photo */}
                             <div
-                                className="relative group"
+                                className=""
                                 onMouseEnter={() => setShowTooltip(true)}
                                 onMouseLeave={() => setShowTooltip(false)}
                             >
                                 <Slide direction="down">
-                                    <details className="relative dropdown">
-                                        <summary className="dropdown">
+                                    <div className="dropdown">
+                                        <div tabIndex={0} className="cursor-pointer">
                                             <img
                                                 referrerPolicy="no-referrer"
                                                 className="w-10 h-10 rounded-full cursor-pointer"
                                                 src={user?.photoURL || "None"}
                                                 alt={user?.displayName || "User"}
                                             />
-                                        </summary>
-                                        <ul className="menu dropdown-content bg-green-600 text-base-100 rounded-box z-[1] mt-1 p-2 shadow absolute -right-16">
+                                        </div>
+                                        <ul tabIndex={0} className="menu menu-sm dropdown-content rounded-box z-[1] bg-green-600 mt-3 p-2 shadow">
                                             <li>
                                                 <Link to={"/create-assignments"}>Create Assignments</Link>
                                             </li>
@@ -126,7 +126,7 @@ const Navbar = () => {
                                                 <Link to={"/my-assignments"}>My Attempted Assignments</Link>
                                             </li>
                                         </ul>
-                                    </details>
+                                    </div>
 
 
                                 </Slide>
