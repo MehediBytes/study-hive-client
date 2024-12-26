@@ -152,7 +152,6 @@ const Assignments = () => {
                     value={difficultyFilter}
                     onChange={(e) => {
                         setDifficultyFilter(e.target.value);
-                        setCurrentPage(1);
                     }}
                 >
                     <option value="">All Difficulties</option>

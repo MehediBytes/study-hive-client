@@ -7,8 +7,7 @@ import Loading from "./Loading";
 
 const MyAssignments = () => {
     const { user } = useContext(AuthContext);
-    const [submittedAssignments, setSubmittedAssignments] = useState([]);
-    console.log(submittedAssignments);
+    const [submittedAssignments, setSubmittedAssignments] = useState([])
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -20,7 +19,6 @@ const MyAssignments = () => {
                 const assignmentsResponse = await axios.get(
                     `${import.meta.env.VITE_API_URL}/assignments`
                 );
-                console.log(assignmentsResponse.data);
                 // Fetch all submissions for the user
                 const submissionsResponse = await axios.get(
                     `${import.meta.env.VITE_API_URL}/submissions`
