@@ -79,8 +79,8 @@ const Navbar = () => {
                             <NavLink to={"/assignments"}>Assignments</NavLink>
                         </li>
                         <li>
-                            {user && user?.email ? <NavLink to={"/pending-assignments"}>Pending Assignments</NavLink> : ""}
-                            
+                            <NavLink to={"/pending-assignments"}>Pending Assignments</NavLink>
+
                         </li>
                     </ul>
                 </Fade>

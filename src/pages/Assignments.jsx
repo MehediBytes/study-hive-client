@@ -162,7 +162,10 @@ const Assignments = () => {
                 <select
                     className="select select-bordered w-full md:w-1/4"
                     value={difficultyFilter}
-                    onChange={(e) => setDifficultyFilter(e.target.value)}
+                    onChange={(e) => {
+                        setDifficultyFilter(e.target.value);
+                        setCurrentPage(1);
+                    }}
                 >
                     <option value="">All Difficulties</option>
                     <option value="easy">Easy</option>
