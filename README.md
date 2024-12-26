@@ -11,7 +11,7 @@ This project is part of a job assessment by BJET Inc. for a junior MERN stack de
 ---
 
 ## Live URL 🌐  
-Live Site Link [Study-Hive](https://study-hive-a11.web.app).  
+Live Site Link: [Study-Hive](https://study-hive-a11.web.app).  
 
 ---
 
