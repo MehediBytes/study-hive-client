@@ -57,7 +57,7 @@ This project is for group study with friends and others. The application handles
 - **sort-by**: `^1.2.0`  
 - **sweetalert2**: `^11.15.3`  
 
-### DevDependencies  
+### 🛠️ DevDependencies  
 - **@eslint/js**: `^9.17.0`  
 - **@types/react**: `^18.3.17`  
 - **@types/react-dom**: `^18.3.5`  
@@ -115,8 +115,40 @@ This project is for group study with friends and others. The application handles
 - **Backend APIs**:  
   - [Assignments API](https://study-hive-server-omega.vercel.app/assignments)
 
- ### 🖋️ Additional Notes  
+ ### 🖋️ Additional Notes
 
 - Ensure your MongoDB Atlas database is properly configured.  
 - Set environment variables for backend APIs.  
 - For production deployment, use Firebase Hosting or Vercel for optimal performance.
+
+### 🖋️ Future Implementations
+
+1. **Real-Time Collaboration**:  
+   - Implement real-time collaboration for users to work together on assignments, make changes simultaneously, and communicate via integrated chat or discussion forums.
+
+2. **Task Scheduling and Reminders**:  
+   - Add a task scheduling system with reminders to notify users about upcoming deadlines for assignments, keeping them on track.
+
+3. **Group Study Sessions**:  
+   - Enable users to create or join group study sessions where they can collaborate, share resources, and provide live feedback on assignments.
+
+4. **Assignment Notifications**:  
+   - Introduce notifications to keep users informed when assignments are completed, graded, or commented on, ensuring they never miss an update.
+
+5. **Peer Review System**:  
+   - Build a peer review system to allow users to review and provide feedback on each other's assignments, promoting collaborative learning.
+
+6. **Advanced Search and Filtering**:  
+   - Enhance the search functionality to allow users to filter assignments by subject, difficulty level, or completion status, making it easier to manage tasks.
+
+7. **Assignment Progress Tracker**:  
+   - Implement a visual progress tracker for assignments, helping users monitor their progress and motivating them to complete their tasks.
+
+8. **Improved Grading System**:  
+   - Expand the grading system to allow for more detailed feedback on assignments, enabling users to learn from their mistakes and improve their work.
+
+9. **Mobile Application**:  
+   - Develop a mobile version of the app for iOS and Android, allowing users to participate in group study, submit assignments, and track progress on the go.
+
+10. **User Customization**:  
+   - Introduce features like dark mode, customizable color themes, and layout preferences for a more personalized user experience.
