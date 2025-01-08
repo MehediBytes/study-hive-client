@@ -1,6 +1,6 @@
 # Study Hive - A group study application 🐝  
 
-Welcome to **Study Hive**, the application for our online group study platform. Study Hive is designed to make learning collaborative and engaging by allowing users to create, complete, and grade assignments with their friends or anyone.  
+Welcome to **Study Hive**, the application is for online group study. Study Hive is designed to make learning collaborative and engaging by allowing users to create, complete, and grade assignments with their friends or anyone.  
 
 ---
 
