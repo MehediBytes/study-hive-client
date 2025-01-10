@@ -119,7 +119,7 @@ const ContactUs = () => {
                     </button>
                 </form>
 
-                <div className="mt-5 md:w-full md:place-items-end">
+                <div className="mt-5 md:w-full md:place-items-end text-gray-950">
                     <div>
                         <h3 className="text-2xl font-semibold mb-5">Contact Information</h3>
                         <div className="flex items-center mt-3">

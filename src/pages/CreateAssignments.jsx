@@ -67,7 +67,7 @@ const CreateAssignments = () => {
     };
 
     return (
-        <div className="max-w-5xl mx-auto pb-10 px-4">
+        <div className="pb-10 px-5">
             <Helmet>
                 <title>Create-Assignment | Study-Hive</title>
             </Helmet>
