@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Fade, Slide } from "react-awesome-reveal";
 import { ThemeContext } from "../provider/ThemeProvider";
@@ -9,6 +9,19 @@ const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
     const [showTooltip, setShowTooltip] = useState(false);
     const { theme, toggleTheme } = useContext(ThemeContext);
+    const location = useLocation();
+
+    useEffect(() => {
+        const hash = location.hash;
+        if (hash) {
+            setTimeout(() => {
+                const target = document.querySelector(hash);
+                if (target) {
+                    target.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+                }
+            }, 100);
+        }
+    }, [location]);
 
     // Handle Logout
     const handleLogout = () => {
@@ -46,17 +59,38 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content rounded-box z-[1] bg-green-600 mt-3 w-52 p-2 shadow"
                         >
-                            <Fade cascade>
-                                <li>
-                                    <NavLink to={"/"}>Home</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={"/assignments"}>Assignments</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={"/pending-assignments"}>Pending Assignments</NavLink>
-                                </li>
-                            </Fade>
+                            {user?.email ?
+                                <Fade cascade>
+                                    <li>
+                                        <NavLink to={"/"}>Home</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/assignments"}>Assignments</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/pending-assignments"}>Pending Assignments</NavLink>
+                                    </li>
+                                    <li>
+                                        <Link to={"/#faq"}>FAQ</Link>
+                                    </li>
+                                    <li>
+                                        <Link to={"/#contact-us"}>Contact Us</Link>
+                                    </li>
+                                </Fade> :
+                                <Fade cascade>
+                                    <li>
+                                        <NavLink to={"/"}>Home</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/assignments"}>Assignments</NavLink>
+                                    </li>
+                                    <li>
+                                        <Link to={"/#faq"}>FAQ</Link>
+                                    </li>
+                                    <li>
+                                        <Link to={"/#contact-us"}>Contact Us</Link>
+                                    </li>
+                                </Fade>}
                         </ul>
                     </div>
                     <div>
@@ -71,20 +105,42 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar-center hidden lg:flex">
-                    <Fade cascade>
-                        <ul className="menu menu-horizontal px-1">
-                            <li>
-                                <NavLink to={"/"}>Home</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={"/assignments"}>Assignments</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={"/pending-assignments"}>Pending Assignments</NavLink>
-
-                            </li>
-                        </ul>
-                    </Fade>
+                    {user?.email ?
+                        <Fade cascade>
+                            <ul className="menu menu-horizontal px-1">
+                                <li>
+                                    <NavLink to={"/"}>Home</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/assignments"}>Assignments</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/pending-assignments"}>Pending Assignments</NavLink>
+                                </li>
+                                <li>
+                                    <Link to={"/#faq"}>FAQ</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/#contact-us"}>Contact Us</Link>
+                                </li>
+                            </ul>
+                        </Fade> :
+                        <Fade cascade>
+                            <ul className="menu menu-horizontal px-1">
+                                <li>
+                                    <NavLink to={"/"}>Home</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to={"/assignments"}>Assignments</NavLink>
+                                </li>
+                                <li>
+                                    <Link to={"/#faq"}>FAQ</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/#contact-us"}>Contact Us</Link>
+                                </li>
+                            </ul>
+                        </Fade>}
                 </div>
 
                 <div className="navbar-end flex items-center gap-4">

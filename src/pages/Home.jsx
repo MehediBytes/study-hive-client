@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import Features from '../components/Features';
 import FAQ from '../components/Faq';
 import ContactUs from '../components/ContactUs';
+import Testimonials from '../components/Testimonials';
 
 const Home = () => {
 
@@ -23,6 +24,9 @@ const Home = () => {
             </section>
 
             {/* Testimonials sections */}
+            <section className='mb-10'>
+                <Testimonials></Testimonials>
+            </section>
 
             {/* FAQ section */}
             <section id='faq' className='mb-10'>
