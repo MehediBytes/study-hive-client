@@ -113,7 +113,7 @@ const PendingAssignments = () => {
             <Helmet>
                 <title>Pending-Assignments | Study-Hive</title>
             </Helmet>
-            <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">
+            <h1 className="text-3xl font-bold text-green-700 mb-8 text-center">
                 Pending Assignments
             </h1>
 
@@ -125,7 +125,7 @@ const PendingAssignments = () => {
                 <div className="overflow-x-auto">
                     <table className="table-auto w-full border-collapse border border-base-100">
                         <thead>
-                            <tr className="bg-green-600 text-base-100">
+                            <tr className="bg-green-700 text-base-100">
                                 <th className="border border-gray-950 px-4 py-2">Title</th>
                                 <th className="border border-gray-950 px-4 py-2">Total Mark</th>
                                 <th className="border border-gray-950 px-4 py-2">Examinee</th>
@@ -150,7 +150,7 @@ const PendingAssignments = () => {
                                     <td className="border border-gray-950 px-4 py-2">
                                         <button
                                             onClick={() => openModal(assignment)}
-                                            className="btn w-full text-base-100 bg-green-600 hover:bg-green-400"
+                                            className="btn w-full text-base-100 bg-green-700 hover:bg-green-500"
                                         >
                                             Give Marks
                                         </button>
@@ -202,7 +202,7 @@ const PendingAssignments = () => {
                         <div className="flex justify-end">
                             <button
                                 onClick={handleMarkSubmit}
-                                className="bg-green-600 text-base-100 px-4 py-2 rounded-md mr-2"
+                                className="bg-green-700 text-base-100 px-4 py-2 rounded-md mr-2"
                             >
                                 Submit
                             </button>

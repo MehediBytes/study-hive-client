@@ -71,7 +71,7 @@ const CreateAssignments = () => {
             <Helmet>
                 <title>Create-Assignment | Study-Hive</title>
             </Helmet>
-            <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">Create Assignment</h1>
+            <h1 className="text-3xl font-bold text-green-700 mb-8 text-center">Create Assignment</h1>
             <form onSubmit={handleSubmit} className="bg-base-100 p-6 rounded-lg shadow-lg space-y-6">
                 <div>
                     <label className="block text-lg font-semibold mb-2" htmlFor="title">Assignment Title</label>
@@ -141,7 +141,7 @@ const CreateAssignments = () => {
                         placeholderText="Select a due date"
                     />
                 </div>
-                <button type="submit" className="btn bg-green-600 text-base-100 hover:bg-green-400 w-full">
+                <button type="submit" className="btn bg-green-700 text-base-100 hover:bg-green-500 w-full">
                     Create Assignment
                 </button>
             </form>

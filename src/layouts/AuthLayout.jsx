@@ -12,7 +12,7 @@ const AuthLayout = () => {
             </nav>
 
             {/* Outlet */}
-            <div className='max-w-6xl pt-32 mx-auto min-h-screen'>
+            <div className='max-w-6xl pt-28 mx-auto min-h-screen'>
                 <Outlet></Outlet>
             </div>
 

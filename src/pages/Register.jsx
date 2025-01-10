@@ -60,21 +60,21 @@ const Register = () => {
                 <div className="w-full max-w-sm">
                     <img src={signUpIcone} className="h-96 w-full" alt="" />
                 </div>
-                <div className="p-4 card bg-base-100 rounded-lg shadow-lg w-full max-w-sm border border-green-400">
-                    <h2 className="text-3xl font-bold mb-6 text-center text-green-600">Register</h2>
-                    <hr className="border-green-400" />
+                <div className="p-4 card bg-base-100 rounded-lg shadow-lg w-full max-w-sm border border-green-500">
+                    <h2 className="text-3xl font-bold mb-6 text-center text-green-700">Register</h2>
+                    <hr className="border-green-500" />
                     <form onSubmit={handleRegister} className="space-y-6 mt-6">
                         <div>
                             <label htmlFor="name" className="block mb-2 text-gray-700 font-medium">Name</label>
-                            <input type="text" name="name" id="name" className="input input-bordered w-full border-green-400 rounded-lg" required />
+                            <input type="text" name="name" id="name" className="input input-bordered w-full border-green-500 rounded-lg" required />
                         </div>
                         <div>
                             <label htmlFor="photo" className="block mb-2 text-gray-700 font-medium">Photo URL</label>
-                            <input type="text" name="photo" id="photo" className="input input-bordered w-full border-green-400 rounded-lg" />
+                            <input type="text" name="photo" id="photo" className="input input-bordered w-full border-green-500 rounded-lg" />
                         </div>
                         <div>
                             <label htmlFor="email" className="block mb-2 text-gray-700 font-medium">Email</label>
-                            <input type="email" name="email" id="email" className="input input-bordered w-full border-green-400 rounded-lg" required />
+                            <input type="email" name="email" id="email" className="input input-bordered w-full border-green-500 rounded-lg" required />
                         </div>
                         <div>
                             <label htmlFor="password" className="block mb-2 text-gray-700 font-medium">Password</label>
@@ -83,7 +83,7 @@ const Register = () => {
                                     type={showPassword ? "text" : "password"}
                                     name="password"
                                     id="password"
-                                    className="input input-bordered w-full border-green-400 rounded-lg"
+                                    className="input input-bordered w-full border-green-500 rounded-lg"
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
@@ -93,10 +93,10 @@ const Register = () => {
                                 </button>
                             </div>
                         </div>
-                        <button type="submit" className="btn w-full bg-green-600 text-base-100 font-bold hover:bg-green-400">Register</button>
+                        <button type="submit" className="btn w-full bg-green-700 text-base-100 font-bold hover:bg-green-500">Register</button>
                     </form>
                     <p className="text-sm mt-6 text-center">
-                        Already have an account? <Link to="/auth/login" className="text-green-600 font-bold hover:underline">Login</Link>
+                        Already have an account? <Link to="/auth/login" className="text-green-700 font-bold hover:underline">Login</Link>
                     </p>
                 </div>
             </div>

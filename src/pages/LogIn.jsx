@@ -65,15 +65,15 @@ const LogIn = () => {
                 <div className="w-full max-w-sm">
                     <img src={loginAnime} className="h-96 w-full" alt="" />
                 </div>
-                <div className="p-4 card bg-base-100 rounded-lg shadow-lg w-full max-w-sm border border-green-400">
-                    <h2 className="text-3xl font-bold mb-6 text-center text-green-600">Login</h2>
-                    <hr className="border-green-400" />
+                <div className="p-4 card bg-base-100 rounded-lg shadow-lg w-full max-w-sm border border-green-500">
+                    <h2 className="text-3xl font-bold mb-6 text-center text-green-700">Login</h2>
+                    <hr className="border-green-500" />
                     <form onSubmit={handleLogin} className="space-y-6 mt-6">
                         <div>
                             <label className="block text-gray-700 font-medium mb-2">Email</label>
                             <input
                                 type="email"
-                                className="input input-bordered w-full border-green-400 focus:ring focus:ring-blue-200 rounded-lg"
+                                className="input input-bordered w-full border-green-500 focus:ring focus:ring-blue-200 rounded-lg"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -83,7 +83,7 @@ const LogIn = () => {
                             <label className="block text-gray-700 font-medium mb-2">Password</label>
                             <input
                                 type={showPassword ? "text" : "password"}
-                                className="input input-bordered w-full border-green-400 focus:ring focus:ring-blue-200 rounded-lg pr-10"
+                                className="input input-bordered w-full border-green-500 focus:ring focus:ring-blue-200 rounded-lg pr-10"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -98,14 +98,14 @@ const LogIn = () => {
                         </div>
                         <button
                             type="submit"
-                            className="btn w-full bg-green-600 text-base-100 font-bold hover:bg-green-400"
+                            className="btn w-full bg-green-700 text-base-100 font-bold hover:bg-green-500"
                         >
                             Login
                         </button>
                         <button
                             type="button"
                             onClick={handleGoogleLogin}
-                            className="btn w-full bg-base-100 text-green-600 border-green-400 hover:bg-green-200 flex items-center justify-center space-x-2"
+                            className="btn w-full bg-base-100 text-green-700 border-green-500 hover:bg-green-200 flex items-center justify-center space-x-2"
                         >
                             <FaGoogle className="text-lg" />
                             <span>Login with Google</span>
@@ -113,7 +113,7 @@ const LogIn = () => {
                     </form>
                     <p className="text-sm mt-6 text-center">
                         Don't have an account?{" "}
-                        <Link to="/auth/register" className="text-green-600 font-bold hover:underline">
+                        <Link to="/auth/register" className="text-green-700 font-bold hover:underline">
                             Register
                         </Link>
                     </p>

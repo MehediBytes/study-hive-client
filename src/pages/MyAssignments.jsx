@@ -61,7 +61,7 @@ const MyAssignments = () => {
             <Helmet>
                 <title>My-Assignments | Study-Hive</title>
             </Helmet>
-            <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">
+            <h1 className="text-3xl font-bold text-green-700 mb-8 text-center">
                 My Submitted Assignments
             </h1>
 
@@ -73,7 +73,7 @@ const MyAssignments = () => {
                 <div className="overflow-x-auto">
                     <table className="table-auto w-full border-collapse border border-gray-300">
                         <thead>
-                            <tr className="bg-green-600 text-base-100">
+                            <tr className="bg-green-700 text-base-100">
                                 <th className="border border-gray-950 px-4 py-2">Title</th>
                                 <th className="border border-gray-950 px-4 py-2">Status</th>
                                 <th className="border border-gray-950 px-4 py-2">Total Marks</th>

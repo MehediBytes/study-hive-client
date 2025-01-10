@@ -68,7 +68,7 @@ const ContactUs = () => {
     return (
         <div id='contact-us' className="px-5 rounded-xl">
             <div className='text-center pb-5'>
-                <h2 className="text-4xl font-bold mb-5 text-green-600">Contact Us</h2>
+                <h2 className="text-4xl font-bold mb-5 text-green-700">Contact Us</h2>
             </div>
             <div className='md:flex md:justify-between md:flex-grow gap-5'>
                 <form onSubmit={sendEmail} className="space-y-4 md:w-full">
@@ -113,7 +113,7 @@ const ContactUs = () => {
                     </div>
                     <button
                         type="submit"
-                        className="btn bg-green-600 text-base-100 hover:bg-green-400 w-full mt-4"
+                        className="btn bg-green-700 text-base-100 hover:bg-green-500 w-full mt-4"
                     >
                         Send Email
                     </button>
@@ -138,7 +138,7 @@ const ContactUs = () => {
                         </div>
                         {/* WhatsApp link with redirect to WhatsApp */}
                         <div className="flex items-center text-2xl mt-3">
-                            <FaWhatsapp className="text-green-600 mr-3" />
+                            <FaWhatsapp className="text-green-700 mr-3" />
                             <a
                                 href="https://wa.me/8801303587085"
                                 target="_blank"

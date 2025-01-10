@@ -28,14 +28,14 @@ const FAQ = () => {
     };
 
     return (
-        <section className="py-5 bg-green-400 rounded-xl">
+        <section className="py-5 bg-green-500 rounded-xl">
             <div className="text-center">
                 <h2 className="text-4xl font-bold text-base-100 mb-5">Frequently Asked Questions</h2>
                 <div className="px-5 space-y-4">
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
-                            className="border border-green-400 bg-white rounded-lg shadow-lg"
+                            className="border border-green-500 bg-white rounded-lg shadow-lg"
                             onClick={() => toggleFaq(index)}
                         >
                             {/* Animated Collapse Header */}

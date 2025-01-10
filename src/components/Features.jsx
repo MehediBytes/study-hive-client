@@ -28,7 +28,7 @@ const Features = () => {
 
     return (
         <motion.section
-            className="py-5 bg-green-400 rounded-xl"
+            className="py-5 bg-green-500 rounded-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -50,7 +50,7 @@ const Features = () => {
                             >
                                 {feature.icon}
                             </motion.div>
-                            <h3 className="text-2xl font-semibold text-green-400 mb-4">
+                            <h3 className="text-2xl font-semibold text-green-500 mb-4">
                                 {feature.title}
                             </h3>
                             <p className="text-gray-600">{feature.description}</p>

@@ -35,7 +35,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="navbar fixed z-10 p-4 text-base-100 bg-green-600">
+        <div className="navbar fixed z-10 px-4 text-base-100 bg-green-700">
             <div className="navbar max-w-7xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -57,7 +57,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content rounded-box z-[1] bg-green-600 mt-3 w-52 p-2 shadow"
+                            className="menu menu-sm dropdown-content rounded-box z-[1] bg-green-700 mt-3 w-52 p-2 shadow"
                         >
                             {user?.email ?
                                 <Fade cascade>
@@ -175,7 +175,7 @@ const Navbar = () => {
                                                     alt={user?.displayName || "User"}
                                                 />
                                             </div>
-                                            <ul tabIndex={0} className="menu menu-sm dropdown-content rounded-box z-[1] bg-green-600 mt-3 p-2 shadow">
+                                            <ul tabIndex={0} className="menu menu-sm dropdown-content rounded-box z-[1] bg-green-700 mt-3 p-2 shadow">
                                                 <li>
                                                     <Link to={"/create-assignments"}>Create Assignments</Link>
                                                 </li>

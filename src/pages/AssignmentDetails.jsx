@@ -109,7 +109,7 @@ const AssignmentDetails = () => {
             <Helmet>
                 <title>Assignments-details | Study-Hive</title>
             </Helmet>
-            <h1 className="text-3xl font-bold text-green-600 mb-8 text-center">
+            <h1 className="text-3xl font-bold text-green-700 mb-8 text-center">
                 {assignment?.title}
             </h1>
 
@@ -134,7 +134,7 @@ const AssignmentDetails = () => {
                                 onClick={handleTakeAssignment}
                                 className={`btn mt-4 ${isDueDateOver
                                     ? "btn-disabled bg-gray-400 text-gray-700"
-                                    : "bg-green-600 text-base-100 hover:bg-green-400"
+                                    : "bg-green-700 text-base-100 hover:bg-green-500"
                                     }`}
                                 disabled={isDueDateOver}
                             >

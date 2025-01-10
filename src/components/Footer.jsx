@@ -15,7 +15,7 @@ const Footer = () => {
     };
 
     return (
-        <div className="bg-green-600">
+        <div className="bg-green-700">
             <footer
                 className="footer max-w-7xl mx-auto text-base-100 items-center p-4"
             >

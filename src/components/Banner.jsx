@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
     return (
         <motion.div
-            className="bg-cover bg-center bg-no-repeat text-base-100 py-24 rounded-xl px-5"
+            className="bg-cover bg-center bg-no-repeat bg-fixed text-base-100 py-28 rounded-xl px-15"
             style={{
                 backgroundImage: `url(${banner})`,
             }}
@@ -45,7 +45,7 @@ const Banner = () => {
                     transition={{ type: "spring", stiffness: 300, delay: 0.3 }}
                 >
                     <Link to={"/assignments"}>
-                        <button className="btn mt-6 bg-green-600 text-base-100 font-semibold rounded-lg px-8 py-3 hover:bg-green-400 shadow-lg">
+                        <button className="btn mt-6 bg-green-700 text-base-100 font-semibold rounded-lg px-8 py-3 hover:bg-green-500 shadow-lg">
                             Get Started
                         </button>
                     </Link>
