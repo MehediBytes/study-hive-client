@@ -14,8 +14,10 @@ createRoot(document.getElementById('root')).render(
     <HelmetProvider>
       <ThemeProvider>
         <AuthProvider>
-          <RouterProvider router={router}></RouterProvider>
-          <ToastContainer position="top-center"></ToastContainer>
+          <div className='bg-green-200'>
+            <RouterProvider router={router}></RouterProvider>
+            <ToastContainer position="top-center"></ToastContainer>
+          </div>
         </AuthProvider>
       </ThemeProvider>
     </HelmetProvider>

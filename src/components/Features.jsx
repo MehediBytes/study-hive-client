@@ -28,18 +28,18 @@ const Features = () => {
 
     return (
         <motion.section
-            className="py-16 bg-green-300 rounded-xl"
+            className="py-5 bg-green-400 rounded-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
         >
             <div className="text-center">
-                <h2 className="text-4xl font-bold text-base-100 mb-10">Our Features</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-5">
+                <h2 className="text-4xl font-bold text-base-100 mb-5">Our Features</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-5">
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
-                            className="bg-base-100 p-8 rounded-lg shadow-lg hover:shadow-2xl transform transition duration-300"
+                            className="bg-base-100 p-5 flex flex-col justify-between flex-grow rounded-lg shadow-lg hover:shadow-2xl transform transition duration-300"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.3, delay: index * 0.2 }}
                         >

@@ -5,14 +5,16 @@ import Navbar from '../components/Navbar';
 
 const AuthLayout = () => {
     return (
-        <div className="max-w-6xl mx-auto bg-green-200">
+        <div>
             {/* Navbar */}
             <nav>
                 <Navbar></Navbar>
             </nav>
 
             {/* Outlet */}
-            <Outlet></Outlet>
+            <div className='max-w-6xl pt-32 mx-auto min-h-screen'>
+                <Outlet></Outlet>
+            </div>
 
             {/* Footer */}
             <footer>

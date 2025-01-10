@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
     return (
         <motion.div
-            className="bg-cover bg-center bg-no-repeat text-base-100 py-32 rounded-xl"
+            className="bg-cover bg-center bg-no-repeat text-base-100 py-24 rounded-xl px-5"
             style={{
                 backgroundImage: `url(${banner})`,
             }}
@@ -16,7 +16,7 @@ const Banner = () => {
         >
 
             <motion.div
-                className="container mx-auto text-center"
+                className="text-center"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}

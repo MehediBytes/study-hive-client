@@ -5,14 +5,16 @@ import Navbar from '../components/Navbar';
 
 const HomeLayout = () => {
     return (
-        <div className="max-w-6xl mx-auto bg-green-200">
+        <div>
             {/* Navbar section */}
             <nav>
                 <Navbar></Navbar>
             </nav>
 
             {/* outlet */}
-            <Outlet></Outlet>
+            <div className='max-w-6xl pt-32 mx-auto min-h-screen'>
+                <Outlet></Outlet>
+            </div>
 
             {/* Footer */}
             <footer>

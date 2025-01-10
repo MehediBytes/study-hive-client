@@ -83,6 +83,10 @@ const AssignmentDetails = () => {
     };
 
     const handleTakeAssignment = () => {
+        if(!user?.email){
+            navigate("/auth/login")
+            toast.error("Plaese log in for take assignments!")
+        }
         setIsModalOpen(true);
     };
 
@@ -120,7 +124,7 @@ const AssignmentDetails = () => {
                 <p className="text-sm">Deadline: {new Date(assignment?.dueDate).toLocaleDateString()}</p>
                 <p className="text-sm">Description: {assignment?.description}</p>
 
-                {user && (
+                {
                     <>
                         <button
                             onClick={handleTakeAssignment}
@@ -138,7 +142,7 @@ const AssignmentDetails = () => {
                             </p>
                         )}
                     </>
-                )}
+                }
 
                 {isModalOpen && (
                     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">

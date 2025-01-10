@@ -28,10 +28,10 @@ const FAQ = () => {
     };
 
     return (
-        <section className="py-16 bg-green-300 rounded-xl">
-            <div className="container mx-auto text-center">
-                <h2 className="text-4xl font-bold text-base-100 mb-10">Frequently Asked Questions</h2>
-                <div className="max-w-4xl mx-auto space-y-4">
+        <section className="py-5 bg-green-400 rounded-xl">
+            <div className="text-center">
+                <h2 className="text-4xl font-bold text-base-100 mb-5">Frequently Asked Questions</h2>
+                <div className="px-5 space-y-4">
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
@@ -43,7 +43,7 @@ const FAQ = () => {
                                 className="cursor-pointer text-lg font-semibold text-gray-800 px-4 py-2"
                                 initial={{ color: "#000" }}
                                 animate={{ color: activeIndex === index ? "#16a34a" : "#000" }}
-                                transition={{ duration: 0.3 }}
+                                transition={{ duration: 0.5 }}
                             >
                                 {faq.question}
                             </motion.div>
@@ -56,7 +56,7 @@ const FAQ = () => {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        transition={{ duration: 0.5, ease: "easeInOut" }}
                                     >
                                         <p>{faq.answer}</p>
                                     </motion.div>
