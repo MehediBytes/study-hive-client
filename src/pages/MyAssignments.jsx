@@ -74,12 +74,12 @@ const MyAssignments = () => {
                     <table className="table-auto w-full border-collapse border border-gray-300">
                         <thead>
                             <tr className="bg-green-600 text-base-100">
-                                <th className="border border-base-100 px-4 py-2">Title</th>
-                                <th className="border border-base-100 px-4 py-2">Status</th>
-                                <th className="border border-base-100 px-4 py-2">Total Marks</th>
-                                <th className="border border-base-100 px-4 py-2">Obtained Marks</th>
-                                <th className="border border-base-100 px-4 py-2">Feedback</th>
-                                <th className="border border-base-100 px-4 py-2">Submitted At</th>
+                                <th className="border border-gray-950 px-4 py-2">Title</th>
+                                <th className="border border-gray-950 px-4 py-2">Status</th>
+                                <th className="border border-gray-950 px-4 py-2">Total Marks</th>
+                                <th className="border border-gray-950 px-4 py-2">Obtained Marks</th>
+                                <th className="border border-gray-950 px-4 py-2">Feedback</th>
+                                <th className="border border-gray-950 px-4 py-2">Submitted At</th>
                             </tr>
                         </thead>
                         <tbody className="text-center">
@@ -88,26 +88,26 @@ const MyAssignments = () => {
                                     key={index}
                                     className={index % 2 === 0 ? "bg-gray-100" : "bg-green-100"}
                                 >
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         {assignment?.title}
                                     </td>
                                     <td
-                                        className={`border border-base-100 px-4 py-2 ${assignment?.status === "pending" && "text-yellow-400"
+                                        className={`border border-gray-950 px-4 py-2 ${assignment?.status === "pending" && "text-yellow-400"
                                             } ${assignment?.status === "completed" && "text-green-500"
                                             }`}
                                     >
                                         {assignment?.status}
                                     </td>
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         {assignment?.marks}
                                     </td>
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         {assignment?.obtainedMarks}
                                     </td>
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         {assignment?.feedback}
                                     </td>
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         {assignment?.submittedAt}
                                     </td>
                                 </tr>

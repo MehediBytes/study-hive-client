@@ -126,10 +126,10 @@ const PendingAssignments = () => {
                     <table className="table-auto w-full border-collapse border border-base-100">
                         <thead>
                             <tr className="bg-green-600 text-base-100">
-                                <th className="border border-base-100 px-4 py-2">Title</th>
-                                <th className="border border-base-100 px-4 py-2">Total Mark</th>
-                                <th className="border border-base-100 px-4 py-2">Examinee</th>
-                                <th className="border border-base-100 px-4 py-2">Actions</th>
+                                <th className="border border-gray-950 px-4 py-2">Title</th>
+                                <th className="border border-gray-950 px-4 py-2">Total Mark</th>
+                                <th className="border border-gray-950 px-4 py-2">Examinee</th>
+                                <th className="border border-gray-950 px-4 py-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="text-center">
@@ -138,16 +138,16 @@ const PendingAssignments = () => {
                                     key={assignment._id}
                                     className={index % 2 === 0 ? "bg-gray-100" : "bg-green-100"}
                                 >
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         {assignment.title}
                                     </td>
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         {assignment.marks}
                                     </td>
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         {assignment.userEmail}
                                     </td>
-                                    <td className="border border-base-100 px-4 py-2">
+                                    <td className="border border-gray-950 px-4 py-2">
                                         <button
                                             onClick={() => openModal(assignment)}
                                             className="btn w-full text-base-100 bg-green-600 hover:bg-green-400"

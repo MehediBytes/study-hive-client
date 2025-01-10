@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
+import signUpIcone from "../assets/signUp-cuate.png";
 
 const Register = () => {
     const { register, setUser, showPassword, setShowPassword, updateUserProfile } = useContext(AuthContext);
@@ -51,48 +52,53 @@ const Register = () => {
     };
 
     return (
-        <div className="flex items-center justify-center my-10">
+        <div className="pb-8 px-5 min-h-screen">
             <Helmet>
                 <title>Register | Study-Hive</title>
             </Helmet>
-            <div className="p-8 card bg-base-100 rounded-lg shadow-lg w-full max-w-md border border-green-400">
-                <h2 className="text-3xl font-bold mb-6 text-center text-green-600">Register</h2>
-                <hr className="border-green-400" />
-                <form onSubmit={handleRegister} className="space-y-6 mt-6">
-                    <div>
-                        <label htmlFor="name" className="block mb-2 text-gray-700 font-medium">Name</label>
-                        <input type="text" name="name" id="name" className="input input-bordered w-full border-green-400 rounded-lg" required />
-                    </div>
-                    <div>
-                        <label htmlFor="photo" className="block mb-2 text-gray-700 font-medium">Photo URL</label>
-                        <input type="text" name="photo" id="photo" className="input input-bordered w-full border-green-400 rounded-lg" />
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="block mb-2 text-gray-700 font-medium">Email</label>
-                        <input type="email" name="email" id="email" className="input input-bordered w-full border-green-400 rounded-lg" required />
-                    </div>
-                    <div>
-                        <label htmlFor="password" className="block mb-2 text-gray-700 font-medium">Password</label>
-                        <div className="relative">
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                name="password"
-                                id="password"
-                                className="input input-bordered w-full border-green-400 rounded-lg"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                            <button type="button" className="absolute right-3 top-1/3" onClick={() => setShowPassword(!showPassword)}>
-                                {showPassword ? <FaEyeSlash /> : <FaEye />}
-                            </button>
+            <div className="md:flex md:justify-center md:items-center gap-20">
+                <div className="w-full max-w-sm">
+                    <img src={signUpIcone} className="h-96 w-full" alt="" />
+                </div>
+                <div className="p-4 card bg-base-100 rounded-lg shadow-lg w-full max-w-sm border border-green-400">
+                    <h2 className="text-3xl font-bold mb-6 text-center text-green-600">Register</h2>
+                    <hr className="border-green-400" />
+                    <form onSubmit={handleRegister} className="space-y-6 mt-6">
+                        <div>
+                            <label htmlFor="name" className="block mb-2 text-gray-700 font-medium">Name</label>
+                            <input type="text" name="name" id="name" className="input input-bordered w-full border-green-400 rounded-lg" required />
                         </div>
-                    </div>
-                    <button type="submit" className="btn w-full bg-green-600 text-base-100 font-bold hover:bg-green-400">Register</button>
-                </form>
-                <p className="text-sm mt-6 text-center">
-                    Already have an account? <Link to="/auth/login" className="text-green-600 font-bold hover:underline">Login</Link>
-                </p>
+                        <div>
+                            <label htmlFor="photo" className="block mb-2 text-gray-700 font-medium">Photo URL</label>
+                            <input type="text" name="photo" id="photo" className="input input-bordered w-full border-green-400 rounded-lg" />
+                        </div>
+                        <div>
+                            <label htmlFor="email" className="block mb-2 text-gray-700 font-medium">Email</label>
+                            <input type="email" name="email" id="email" className="input input-bordered w-full border-green-400 rounded-lg" required />
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="block mb-2 text-gray-700 font-medium">Password</label>
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    id="password"
+                                    className="input input-bordered w-full border-green-400 rounded-lg"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <button type="button" className="absolute right-3 top-1/3" onClick={() => setShowPassword(!showPassword)}>
+                                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" className="btn w-full bg-green-600 text-base-100 font-bold hover:bg-green-400">Register</button>
+                    </form>
+                    <p className="text-sm mt-6 text-center">
+                        Already have an account? <Link to="/auth/login" className="text-green-600 font-bold hover:underline">Login</Link>
+                    </p>
+                </div>
             </div>
         </div>
     );
