@@ -150,5 +150,5 @@ This project is for group study with friends and others. The application handles
 9. **Mobile Application**:  
    - Develop a mobile version of the app for iOS and Android, allowing users to participate in group study, submit assignments, and track progress on the go.
 
-10. **User Customization**:  
-   - Introduce features like dark mode, customizable color themes, and layout preferences for a more personalized user experience.
+10. **User And Admin Dashboard**:  
+   - Implement dashboard for admin and users.
