@@ -77,7 +77,7 @@ This project is for group study with friends and others. The application handles
 
 ### 🖼️ Project Screenshot  
 
-![StudyHive Screenshot 1](https://i.ibb.co.com/DWP74TD/s-h-1.png) 
+![StudyHive Screenshot 1](https://i.ibb.co.com/21xdNkVc/Screenshot-2025-02-12-144014.png) 
 ![StudyHive Screenshot 2](https://i.ibb.co.com/YLpcXKc/s-h-2.png) 
 
 ---
