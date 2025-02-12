@@ -28,7 +28,7 @@ const Features = () => {
 
     return (
         <motion.section
-            className="py-5 bg-green-500 rounded-xl"
+            className="py-5 bg-green-700 rounded-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
