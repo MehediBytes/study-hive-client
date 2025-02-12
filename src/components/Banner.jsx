@@ -45,7 +45,7 @@ const Banner = () => {
                     transition={{ type: "spring", stiffness: 300, delay: 0.3 }}
                 >
                     <Link to={"/assignments"}>
-                        <button className="btn mt-6 bg-green-700 text-base-100 font-semibold rounded-lg px-8 py-3 hover:bg-green-500 shadow-lg">
+                        <button className="btn mt-6 bg-green-700 text-base-100 font-semibold border-green-700 rounded-lg px-8 py-3 hover:bg-green-500 shadow-lg">
                             Get Started
                         </button>
                     </Link>
