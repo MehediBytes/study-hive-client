@@ -211,7 +211,7 @@ const Navbar = () => {
                             <div className="flex flex-col md:flex-row justify-center items-center gap-2">
                                 <Fade cascade>
                                     <Link to={"/auth/login"}>
-                                        <button className="btn btn-outline text-base-100 w-20">
+                                        <button className="btn btn-outline text-base-100">
                                             Log-In
                                         </button>
                                     </Link>
