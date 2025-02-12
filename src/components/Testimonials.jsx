@@ -28,9 +28,9 @@ const Testimonials = () => {
                         <img
                             src={testimonial.image}
                             alt={testimonial.name}
-                            className="w-20 h-20 rounded-full mx-auto mb-3"
+                            className="w-40 h-40 rounded-full mx-auto mb-3 border-2 border-green-500"
                         />
-                        <h3 className="text-xl font-semibold">{testimonial.name}</h3>
+                        <h3 className="text-2xl font-semibold">{testimonial.name}</h3>
                         <p className="text-gray-600 mt-2">{testimonial.feedback}</p>
                     </div>
                 ))}
